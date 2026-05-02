@@ -1,0 +1,61 @@
+# App Flow Diagram: CAFE co. Web Application
+
+**Document Version:** 1.0
+**Date:** May 2, 2026
+**Author:** Manus AI
+
+## 1. Introduction
+
+This document provides a visual representation of the user journey and data flow within the CAFE co. web application. The diagram illustrates how different sections of the website connect and interact with each other, as well as with the backend database components.
+
+## 2. App Flow Diagram
+
+The following diagram outlines the primary navigation paths and data interactions within the CAFE co. web application.
+
+![CAFE co. App Flow Diagram](https://private-us-east-1.manuscdn.com/sessionFile/a0T7nhIrbbAyDLaRScznOg/sandbox/at0gtiBmdW0SVDqzmrGOxX-images_1777702804716_na1fn_L2hvbWUvdWJ1bnR1L2NhZmVfY29fYXBwX2Zsb3c.png?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvYTBUN25oSXJiYkF5RExhUlNjem5PZy9zYW5kYm94L2F0MGd0aUJtZFcwU1ZEcXptckdPeFgtaW1hZ2VzXzE3Nzc3MDI4MDQ3MTZfbmExZm5fTDJodmJXVXZkV0oxYm5SMUwyTmhabVZmWTI5ZllYQndYMlpzYjNjLnBuZyIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=Gy2qdC~46T2M0OkjUZ5qgx~BWvlGxzhC9cxTQB5TL3osSJm4Dyz8E3aIxoJTf8yVBqwHJ6SxpIgvmI~K1UpTXmITugAGMCHJrPSumJQ~zK9yWFUX9jDju1P3d7ih8GyUSW5Cd59BtwtifwBhT5M6cIYr8U0MzMZQtTwh4uCXm4XcizA98LA-llgl3T1UH6g8xFA8mP9kPLOhB91LQ7iwt4SDMbMMuERlKhEVcFJ86C7s6lZsUVx05voVfijn7qXIBNhiGH3oY16iQ4mkX84uRVV7JgfRVdR-q7WziEKI9~MqpBQ6IyT6vxohLqLYkbZmrhZtSg5OQcjg93P2Shuk7Q__)
+
+## 3. Flow Description
+
+### 3.1. Home Pages
+
+The user's journey typically begins with one of the three distinct home page versions:
+
+*   **Brutalist Hero:** A bold entry point leading to core informational pages like "About Us."
+*   **Video-Background Minimalist:** Offers a visually engaging start, often directing users towards the "Menu" section.
+*   **Interactive Product-Focus:** Designed to highlight specific offerings, guiding users to pages such as "Team."
+
+### 3.2. Core Pages
+
+From the home pages, users can navigate to the core content sections of the website:
+
+*   **About Us:** Provides information about the CAFE co. brand and philosophy.
+*   **Menu (DB-driven):** Displays the cafe's offerings, with data pulled directly from the `MenuDB`.
+*   **Team & Team Details:** Introduces the CAFE co. team members and provides more in-depth profiles.
+*   **Shop & Shop Details:** Allows users to browse products, add them to a cart (with basic cart logic), and view detailed product information, interacting with the `ShopDB`.
+
+### 3.3. Utility Pages
+
+These pages provide essential functionalities for user interaction:
+
+*   **Reservation (Functional Form):** Users can book tables, with their details (`name`, `email`, `guest_count`, `table_location`, `date`, `time`) being stored in the `BookingsDB` after conflict checks.
+*   **Contact (Functional Form):** Users can submit inquiries, which are then recorded in the `InquiriesDB` with `subject`, `message`, `timestamp`, and `user_contact_info`.
+*   **Blog Lists & Blog Details:** Users can browse articles and read detailed blog posts.
+*   **Gallery (Masonry Grid):** Showcases images of the cafe, events, and products in an aesthetically pleasing layout.
+
+### 3.4. Celebration Hub
+
+The "Celebration Hub" is a specialized, multi-step interactive builder for booking parties and events. User inputs, including `event_type`, `estimated_budget`, `add_ons`, and `lead_status`, are directly written to the `EventLeadsDB`.
+
+### 3.5. Backend & Database Interactions
+
+The backend system acts as the central data management layer. It interacts with several databases:
+
+*   **Bookings DB:** Stores all reservation details.
+*   **Inquiries DB:** Stores all contact form submissions.
+*   **Event Leads DB:** Stores all event booking inquiries from the Celebration Hub.
+*   **Menu DB:** Provides dynamic menu content to the "Menu" page.
+*   **Shop DB:** Provides product information to the "Shop" and "Shop Details" pages.
+
+## 4. References
+
+No external references were used in the creation of this document. All information is derived from the provided prompt.

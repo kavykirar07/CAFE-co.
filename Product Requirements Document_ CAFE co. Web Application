@@ -1,0 +1,106 @@
+# Product Requirements Document: CAFE co. Web Application
+
+**Document Version:** 1.0
+**Date:** May 2, 2026
+**Author:** Manus AI
+
+## 1. Introduction
+
+This Product Requirements Document (PRD) outlines the vision, scope, and functional requirements for the "CAFE co." web application. The objective is to develop a 15-page, high-performance web application that embodies a "Brutalist-Chic" aesthetic, intentionally breaking conventional layout norms while maintaining a robust Bootstrap 5 grid foundation. This application aims to provide an immersive and unique digital experience for users, reflecting the rebellious and sophisticated spirit of CAFE co.
+
+## 2. Goals and Vision
+
+**Vision:** To create a groundbreaking web presence for CAFE co. that transcends typical cafe websites, offering an artistic and highly interactive digital journey that captivates users and reinforces the brand's unique identity.
+
+**Goals:**
+*   **Establish a Distinct Digital Identity:** Develop a website with a "Brutalist-Chic" aesthetic, utilizing massive typography, overlapping layers, high-contrast color schemes, and dynamic layouts to create a memorable user experience.
+*   **Enhance User Engagement:** Implement advanced animations (GSAP/Framer Motion) for scroll-triggered reveals, magnetic buttons, and liquid page transitions to foster an engaging and interactive environment.
+*   **Provide Comprehensive Information:** Offer detailed information about CAFE co., including menu, team, shop, blog, and gallery, presented in an aesthetically unique and user-friendly manner.
+*   **Facilitate Core Business Operations:** Integrate functional forms for reservations, contact inquiries, and a specialized event booking system to streamline customer interactions and lead generation.
+*   **Ensure Technical Excellence:** Build a robust, scalable, and maintainable full-stack application with a well-defined backend architecture and adherence to modern development standards, including responsive design and "Pixel Perfect" execution.
+
+## 3. User Stories / Personas
+
+### Persona 1: The Curious Explorer
+*   **Name:** Alex (28, Graphic Designer)
+*   **Needs:** To discover unique and aesthetically pleasing cafes, explore menus, and understand the brand's vibe before visiting.
+*   **User Story:** 
+*   As a curious explorer, I want to browse the website and be visually stimulated by its unique design and dynamic elements, so I can get a strong sense of CAFE co.
+*   As a curious explorer, I want to easily find the menu, gallery, and 'About Us' sections, so I can learn more about the cafe's offerings and philosophy.
+*   As a curious explorer, I want to see high-quality images of the cafe interior and products, so I can visualize the experience.
+
+### Persona 2: The Event Planner
+*   **Name:** Sarah (35, Marketing Manager)
+*   **Needs:** To find a unique venue for corporate events or personal celebrations, and easily inquire about booking and customization options.
+*   **User Story:**
+    *   As an event planner, I want to use the "Celebration Hub" to explore different event types and add-ons, so I can plan a customized event.
+    *   As an event planner, I want to submit an event inquiry with details like budget and specific requirements, so CAFE co. can provide a tailored quote.
+    *   As an event planner, I want to see examples of past events or venue setups in the gallery, so I can visualize my event.
+
+### Persona 3: The Regular Customer
+*   **Name:** Mark (42, Freelance Writer)
+*   **Needs:** To quickly make a reservation, check for new menu items, or read blog posts.
+*   **User Story:**
+    *   As a regular customer, I want to easily make a reservation for a specific date and time, so I can secure my spot.
+    *   As a regular customer, I want to quickly view the updated menu, so I can see what's new.
+    *   As a regular customer, I want to read the latest blog posts, so I can stay informed about CAFE co. news and events.
+
+## 4. Functional Requirements
+
+### 4.1. Visual and Interactive Elements
+*   **FR1.1:** The website SHALL implement a "Brutalist-Chic" aesthetic with massive typography, overlapping layers, and high-contrast color schemes.
+*   **FR1.2:** The layout SHALL intentionally break the 1280px Bootstrap 5 grid with staggered column offsets, absolute-positioned decorative elements, and vertical text sidebars.
+*   **FR1.3:** The website SHALL integrate with Stock Image APIs (Unsplash/Pexels) to dynamically pull high-resolution imagery of industrial cafe interiors, specialty coffee textures, and vibrant party atmospheres.
+*   **FR1.4:** All dynamic images SHALL use `object-fit: cover` and custom aspect-ratio containers to ensure "Pixel Perfect" alignment.
+*   **FR1.5:** The website SHALL implement GSAP or Framer Motion for scroll-triggered reveals, magnetic buttons, and liquid page transitions.
+
+### 4.2. Page Scope
+*   **FR2.1:** The website SHALL include 15 distinct pages, built with modular, reusable components.
+*   **FR2.2:** Three Home Page versions SHALL be available: Brutalist Hero, Video-Background Minimalist, and Interactive Product-Focus.
+*   **FR2.3:** Core pages SHALL include: About Us, Menu (DB-driven), Team, Team Details, Shop (with Cart Logic), and Shop Details.
+*   **FR2.4:** Utility pages SHALL include: Reservation (Functional Form), Blog Lists, Blog Details, Gallery (Masonry Grid), and Contact (Functional Form).
+*   **FR2.5:** A "Celebration Hub" page SHALL provide a multi-step interactive builder for booking parties/events.
+
+### 4.3. Backend and Database
+*   **FR3.1:** The application SHALL have a fully functional backend developed using Node/Express or Python.
+*   **FR3.2:** The application SHALL utilize a PostgreSQL or SQLite database.
+*   **FR3.3:** The database SHALL include a `bookings` table with fields for `name`, `email`, `guest_count`, `table_location`, `date`, and `time`.
+*   **FR3.4:** The `bookings` table SHALL implement conflict-check logic for reservations.
+*   **FR3.5:** The database SHALL include an `inquiries` table with fields for `subject`, `message`, `timestamp`, and `user_contact_info`.
+*   **FR3.6:** The database SHALL include an `event_leads` table with fields for `event_type`, `estimated_budget`, `add_ons`, and `lead_status`.
+*   **FR3.7:** The Reservation, Contact, and Celebration Hub forms SHALL interact directly with the backend API to store data in the respective database tables.
+
+### 4.4. Technical Specifications
+*   **FR4.1:** The frontend SHALL be built using Bootstrap 5 for grid and utilities, complemented by Custom SCSS.
+*   **FR4.2:** Icons SHALL be exclusively SVG, sourced from Feather Icons & Flaticon.
+*   **FR4.3:** Typography SHALL utilize Google Fonts, with a high-impact Serif for headers and a clean Sans-serif for body text.
+*   **FR4.4:** The codebase SHALL be clean, well-documented, and modular.
+*   **FR4.5:** The website SHALL be fully responsive and mobile-optimized, preserving the desktop's "crazy" energy.
+*   **FR4.6:** The design SHALL achieve "Pixel Perfect" execution on all 1280px breakpoints.
+
+## 5. Non-Functional Requirements
+
+*   **Performance:** The website SHALL load quickly, with animations and transitions running smoothly across various devices and network conditions.
+*   **Security:** All data transmissions (e.g., form submissions) SHALL be secured using HTTPS. User input SHALL be validated to prevent common web vulnerabilities.
+*   **Scalability:** The backend architecture SHALL be designed to handle increasing traffic and data volume without significant performance degradation.
+*   **Maintainability:** The codebase SHALL be modular, well-commented, and follow established coding standards to facilitate future updates and maintenance.
+*   **Usability:** Despite the unconventional design, the website SHALL remain intuitive and easy to navigate for all user personas.
+*   **Accessibility:** The website SHALL adhere to WCAG 2.1 AA guidelines where feasible, ensuring a broad audience can access the content.
+
+## 6. Out of Scope
+
+*   User authentication and login system (beyond basic contact info for reservations/inquiries).
+*   Payment gateway integration for the shop (cart logic will be present, but checkout will be out of scope for this phase).
+*   Advanced CRM integration for event leads.
+*   Multi-language support.
+
+## 7. Future Considerations
+
+*   User accounts and personalized dashboards.
+*   Full e-commerce functionality with payment processing.
+*   Integration with third-party marketing and analytics tools.
+*   Advanced AI-driven personalization of content.
+
+## 8. References
+
+No external references were used in the creation of this document. All information is derived from the provided prompt.

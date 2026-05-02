@@ -1,0 +1,44 @@
+@use 'variables' as *;
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--cream);
+  background-color: var(--void);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.hero-title {
+  font-family: var(--font-hero);
+  font-size: clamp(60px, 10vw, 200px);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 0.85;
+  margin-left: -5vw;
+  width: 110vw;
+  white-space: normal;
+}
+
+.editorial-header {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+.accent-text, .form-label, .price {
+  font-family: var(--font-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-transform: uppercase;
+  font-family: var(--font-accent);
+  letter-spacing: 0.2em;
+}

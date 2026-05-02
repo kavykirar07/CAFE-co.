@@ -1,0 +1,31 @@
+:root {
+  // Core Colors
+  --void: #0A0A0A;
+  --cream: #F5F0E8;
+  --burn: #C8390A;
+  --grain: #8B7355;
+  --chalk: #E8E4DC;
+
+  // Typography
+  --font-hero: 'Bebas Neue', sans-serif;
+  --font-hero-alt: 'Anton', sans-serif;
+  --font-editorial: 'Playfair Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-accent: 'Space Mono', monospace;
+
+  // Timing
+  --transition-fast: 0.3s ease;
+  --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.32, 1);
+}
+
+// Brutalist Mixins
+@mixin bleeder-text {
+  position: relative;
+  left: -10vw;
+  width: 120vw;
+  white-space: nowrap;
+}
+
+@mixin ruled-line {
+  border-top: 1px solid var(--grain);
+}

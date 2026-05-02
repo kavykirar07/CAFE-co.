@@ -1,0 +1,100 @@
+# Backend Schema Documentation: CAFE co. Web Application
+
+**Document Version:** 1.0
+**Date:** May 2, 2026
+**Author:** Manus AI
+
+## 1. Introduction
+
+This document details the backend database schema for the CAFE co. web application. The schema is designed to support the functional requirements outlined in the Product Requirements Document (PRD), ensuring efficient storage and retrieval of data for reservations, inquiries, event leads, menu items, and shop products. The database will primarily utilize PostgreSQL or SQLite.
+
+## 2. Database Tables
+
+### 2.1. `bookings` Table
+
+This table stores information related to customer reservations made through the website.
+
+| Field Name       | Data Type      | Constraints      | Description                                     |
+| :--------------- | :------------- | :--------------- | :---------------------------------------------- |
+| `booking_id`     | UUID / INTEGER | PRIMARY KEY      | Unique identifier for each booking              |
+| `name`           | VARCHAR(255)   | NOT NULL         | Full name of the person making the reservation  |
+| `email`          | VARCHAR(255)   | NOT NULL         | Email address of the person making the reservation |
+| `guest_count`    | INTEGER        | NOT NULL, > 0    | Number of guests for the reservation            |
+| `table_location` | VARCHAR(50)    | NOT NULL         | Preferred table location (e.g., Indoor, Bar, Patio) |
+| `reservation_date` | DATE           | NOT NULL         | Date of the reservation                         |
+| `reservation_time` | TIME           | NOT NULL         | Time of the reservation                         |
+| `created_at`     | TIMESTAMP      | DEFAULT NOW()    | Timestamp when the booking was created          |
+
+**Conflict-Check Logic:** Before inserting a new booking, the system will check for existing reservations at the same `reservation_date`, `reservation_time`, and `table_location` to prevent double-booking. Further logic can be implemented to manage table capacity.
+
+### 2.2. `inquiries` Table
+
+This table stores messages submitted through the contact form.
+
+| Field Name       | Data Type      | Constraints      | Description                                     |
+| :--------------- | :------------- | :--------------- | :---------------------------------------------- |
+| `inquiry_id`     | UUID / INTEGER | PRIMARY KEY      | Unique identifier for each inquiry              |
+| `subject`        | VARCHAR(255)   | NOT NULL         | Subject of the inquiry                          |
+| `message`        | TEXT           | NOT NULL         | Full message content                            |
+| `user_contact_info` | VARCHAR(255)   | NOT NULL         | Contact information of the user (e.g., email, phone) |
+| `timestamp`      | TIMESTAMP      | DEFAULT NOW()    | Timestamp when the inquiry was submitted        |
+| `status`         | VARCHAR(50)    | DEFAULT 'New'    | Status of the inquiry (e.g., New, In Progress, Resolved) |
+
+### 2.3. `event_leads` Table
+
+This table captures detailed information for event booking inquiries from the Celebration Hub.
+
+| Field Name       | Data Type      | Constraints      | Description                                     |
+| :--------------- | :------------- | :--------------- | :---------------------------------------------- |
+| `lead_id`        | UUID / INTEGER | PRIMARY KEY      | Unique identifier for each event lead           |
+| `event_type`     | VARCHAR(100)   | NOT NULL         | Type of event (e.g., Birthday, Anniversary, Corporate) |
+| `estimated_budget` | DECIMAL(10, 2) | NULLABLE         | Estimated budget for the event                  |
+| `add_ons`        | TEXT           | NULLABLE         | Comma-separated list of requested add-ons (e.g., Live Music, Catering, Decor) |
+| `lead_status`    | VARCHAR(50)    | DEFAULT 'New'    | Current status of the event lead (e.g., New, Contacted, Quoted, Booked) |
+| `contact_name`   | VARCHAR(255)   | NOT NULL         | Name of the event organizer                     |
+| `contact_email`  | VARCHAR(255)   | NOT NULL         | Email of the event organizer                    |
+| `contact_phone`  | VARCHAR(50)    | NULLABLE         | Phone number of the event organizer             |
+| `event_date`     | DATE           | NULLABLE         | Preferred date for the event                    |
+| `guest_count`    | INTEGER        | NULLABLE         | Estimated number of guests                      |
+| `notes`          | TEXT           | NULLABLE         | Any additional notes or special requests        |
+| `created_at`     | TIMESTAMP      | DEFAULT NOW()    | Timestamp when the lead was created             |
+
+### 2.4. `menu_items` Table (Example for DB-driven Menu)
+
+This table would store details for menu items, allowing for dynamic updates.
+
+| Field Name       | Data Type      | Constraints      | Description                                     |
+| :--------------- | :------------- | :--------------- | :---------------------------------------------- |
+| `item_id`        | UUID / INTEGER | PRIMARY KEY      | Unique identifier for each menu item            |
+| `name`           | VARCHAR(255)   | NOT NULL         | Name of the menu item                           |
+| `description`    | TEXT           | NULLABLE         | Description of the menu item                    |
+| `price`          | DECIMAL(10, 2) | NOT NULL, > 0    | Price of the menu item                          |
+| `category`       | VARCHAR(100)   | NOT NULL         | Category of the item (e.g., Coffee, Pastries, Food) |
+| `image_url`      | VARCHAR(255)   | NULLABLE         | URL to the image of the menu item               |
+| `is_available`   | BOOLEAN        | DEFAULT TRUE     | Indicates if the item is currently available    |
+
+### 2.5. `shop_products` Table (Example for Shop with Cart Logic)
+
+This table would store details for products sold in the online shop.
+
+| Field Name       | Data Type      | Constraints      | Description                                     |
+| :--------------- | :------------- | :--------------- | :---------------------------------------------- |
+| `product_id`     | UUID / INTEGER | PRIMARY KEY      | Unique identifier for each product              |
+| `name`           | VARCHAR(255)   | NOT NULL         | Name of the product                             |
+| `description`    | TEXT           | NULLABLE         | Description of the product                      |
+| `price`          | DECIMAL(10, 2) | NOT NULL, > 0    | Price of the product                            |
+| `stock_quantity` | INTEGER        | NOT NULL, >= 0   | Current stock quantity                          |
+| `image_url`      | VARCHAR(255)   | NULLABLE         | URL to the image of the product                 |
+| `category`       | VARCHAR(100)   | NULLABLE         | Category of the product (e.g., Merchandise, Beans) |
+
+## 3. Relationships
+
+While direct foreign key relationships are not explicitly defined in the prompt, a relational database like PostgreSQL would typically establish the following:
+
+*   `bookings` and `inquiries` tables are independent.
+*   `event_leads` table is independent.
+*   `menu_items` and `shop_products` tables are independent entities, though they might be linked to an `orders` table if full e-commerce functionality were implemented in the future.
+
+## 4. References
+
+No external references were used in the creation of this document. All information is derived from the provided prompt and PRD.

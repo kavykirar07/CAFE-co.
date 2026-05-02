@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Menu | CAFE co.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap-grid.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./scss/main.scss">
+  <style>
+    /* Menu Filters */
+    .menu-filters {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 4rem;
+      border-bottom: 1px solid var(--grain);
+      padding-bottom: 1rem;
+      overflow-x: auto;
+    }
+    .filter-tab {
+      font-family: var(--font-accent);
+      text-transform: uppercase;
+      color: var(--chalk);
+      background: none;
+      border: none;
+      cursor: none;
+      font-size: 0.9rem;
+      padding: 0;
+      position: relative;
+      transition: color var(--transition-fast);
+    }
+    .filter-tab::after {
+      content: '';
+      position: absolute;
+      bottom: -1rem;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--burn);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition-fast);
+    }
+    .filter-tab:hover, .filter-tab.active {
+      color: var(--cream);
+    }
+    .filter-tab:hover::after, .filter-tab.active::after {
+      transform: scaleX(1);
+    }
+    
+    /* Menu Cards */
+    .menu-card {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 3rem;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.32, 1);
+      cursor: none;
+    }
+    .menu-card:hover {
+      transform: translateY(-8px);
+    }
+    .menu-card .img-container {
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    .menu-card img {
+      aspect-ratio: 4/3;
+      width: 100%;
+      object-fit: cover;
+      filter: contrast(1.08) saturate(0.92);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.32, 1);
+    }
+    .menu-card:hover img {
+      transform: scale(1.05);
+    }
+    .menu-card .name {
+      font-family: var(--font-editorial);
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .menu-card .desc {
+      color: var(--chalk);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+    .menu-card .price {
+      font-family: var(--font-accent);
+      color: var(--cream);
+      transition: color var(--transition-fast);
+    }
+    .menu-card:hover .price {
+      color: var(--burn);
+    }
+  </style>
+</head>
+<body style="padding-top: 100px;">
+
+  <nav class="site-nav scrolled">
+    <a href="index.html" class="logo">CAFE co.</a>
+    <div class="nav-links">
+      <a href="about.html">About</a>
+      <a href="menu.html" class="active">Menu</a>
+      <a href="shop.html">Shop</a>
+    </div>
+    <a href="reservations.html" class="btn-brutal btn-primary">Reserve a Table</a>
+  </nav>
+
+  <div class="container py-5">
+    <h1 class="hero-title" style="font-size: clamp(60px, 8vw, 150px); left: 0;">OUR<br>OFFERINGS.</h1>
+    
+    <div class="menu-filters mt-5">
+      <button class="filter-tab active" data-filter="all">All</button>
+      <button class="filter-tab" data-filter="Espresso Drinks">Espresso Drinks</button>
+      <button class="filter-tab" data-filter="Cold Brew">Cold Brew</button>
+      <button class="filter-tab" data-filter="Pour Overs">Pour Overs</button>
+      <button class="filter-tab" data-filter="Food">Food</button>
+      <button class="filter-tab" data-filter="Merch">Merch</button>
+    </div>
+
+    <div class="row" id="menu-grid">
+      <!-- Injected by JS -->
+      <div class="col-12 text-center py-5">
+        <p class="accent-text">Loading the menu...</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="./js/cursor.js"></script>
+  <script>
+    (async () => {
+      const grid = document.getElementById('menu-grid');
+      let items = [];
+
+      try {
+        const res = await fetch('http://localhost:3001/api/menu');
+        items = await res.json();
+        renderMenu(items);
+      } catch (err) {
+        grid.innerHTML = '<div class="col-12 text-center text-danger">Failed to load menu.</div>';
+      }
+
+      function renderMenu(data) {
+        grid.innerHTML = '';
+        data.forEach(item => {
+          const col = document.createElement('div');
+          col.className = 'col-12 col-md-6 col-lg-4 menu-item-container';
+          col.innerHTML = `
+            <div class="menu-card">
+              <div class="img-container">
+                <img src="${item.image_url}" alt="${item.name}">
+              </div>
+              <div class="name">${item.name}</div>
+              <div class="desc">${item.description}</div>
+              <div class="price">₹${item.price}</div>
+            </div>
+          `;
+          grid.appendChild(col);
+        });
+
+        // Intro animation
+        gsap.from('.menu-card', {
+          y: 50,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: 'power2.out'
+        });
+      }
+
+      // Filter Logic
+      const tabs = document.querySelectorAll('.filter-tab');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          tabs.forEach(t => t.classList.remove('active'));
+          e.target.classList.add('active');
+          const filter = e.target.getAttribute('data-filter');
+          
+          gsap.to('.menu-card', {
+            opacity: 0,
+            y: 20,
+            duration: 0.3,
+            onComplete: () => {
+              const filtered = filter === 'all' ? items : items.filter(i => i.category === filter);
+              renderMenu(filtered);
+            }
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

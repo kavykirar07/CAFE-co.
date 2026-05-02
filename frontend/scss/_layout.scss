@@ -1,0 +1,51 @@
+@use 'variables' as *;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+// Bootstrap Overrides and Brutalist Grid Rules
+.container {
+  max-width: 1280px !important;
+}
+
+.stagger-section {
+  margin-top: -15vh;
+  position: relative;
+  z-index: 10;
+}
+
+.structural-rule {
+  width: 100%;
+  border-top: 1px solid var(--grain);
+  margin: 4rem 0;
+}
+
+.hero-section {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  
+  .bg-layer { 
+    z-index: 1; 
+    position: absolute; 
+    inset: 0; 
+    width: 100vw; 
+    height: 100vh;
+    img {
+      width: 100vw !important;
+      height: 100vh !important;
+      object-fit: cover;
+    }
+  }
+  .mid-layer { z-index: 2; position: absolute; inset: 0; background: rgba(10, 10, 10, 0.4); }
+  .fg-layer { z-index: 3; position: relative; height: 100%; display: flex; flex-direction: column; justify-content: center; }
+}
+
+.img-brutalist {
+  width: 100%;
+  object-fit: cover;
+  filter: contrast(1.08) saturate(0.92);
+  transition: transform var(--transition-slow);
+}

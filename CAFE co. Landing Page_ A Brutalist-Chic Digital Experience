@@ -1,0 +1,60 @@
+# CAFE co. Landing Page: A Brutalist-Chic Digital Experience
+
+**Role:** Senior Full-Stack Engineer & Creative Developer
+
+**Objective:** Forge a 15-page, high-octane web application for "CAFE co." that shatters conventional layout paradigms while meticulously adhering to a 1280px Bootstrap 5 grid foundation. This is not just a website; it's an immersive digital art piece, a visceral journey into the heart of CAFE co.'s rebellious spirit.
+
+## 1. The Visual Identity: The "Crazy" Mandate Reimagined
+
+**Aesthetic:** **Brutalist-Chic.** Envision a raw, unapologetic elegance. We demand colossal typography that screams presence, audacious overlapping layers that defy gravity, and high-contrast color schemes that electrify the senses. This is a digital brutalism, softened by sophisticated design choices, creating an aesthetic that is both jarring and irresistibly captivating.
+
+**Layout Logic:** We will wield the 1280px Bootstrap 5 grid not as a constraint, but as a canvas for calculated rebellion. Expect **staggered column offsets** that create dynamic visual tension, **absolute-positioned decorative elements** that float with deliberate purpose, and **vertical text sidebars** that slice through the design, adding an unexpected dimension. The grid is our rhythm, but we're composing a symphony of controlled chaos.
+
+**Dynamic Assets:**
+
+*   **Curated Visuals:** Seamlessly integrate with **Stock Image APIs (Unsplash/Pexels)** to pull a relentless stream of high-resolution imagery. We seek the stark beauty of industrial cafe interiors, the intricate textures of specialty coffee, and the pulsating energy of vibrant party atmospheres. Each image will be a carefully selected narrative element.
+*   **Pixel-Perfect Immersion:** Every visual asset will be meticulously crafted with `object-fit: cover` and custom aspect-ratio containers, ensuring **"Pixel Perfect" alignment** that adapts flawlessly to dynamic content. This is precision within pandemonium.
+
+**Animations:** Elevate the user experience with a symphony of motion, powered by **GSAP or Framer Motion**. Implement **scroll-triggered reveals** that unveil content with dramatic flair, **magnetic buttons** that subtly draw the user's interaction, and **liquid page transitions** that dissolve and reform, transforming navigation into an art form.
+
+## 2. Full-Stack Database Architecture: The Intelligent Backbone
+
+The application demands a robust, fully functional backend, powered by **Node/Express or Python**, and underpinned by a resilient database, preferably **PostgreSQL or SQLite**. This architecture will be the intelligent backbone, supporting the dynamic front-end with seamless data management.
+
+**Database Schema Requirements:**
+
+*   **Page 10 (Reservations):** A meticulously designed table for bookings, capturing `name`, `email`, `guest_count`, `table_location` (e.g., Indoor/Bar/Patio), `date`, and `time`. Crucially, this will include sophisticated **conflict-check logic** to ensure flawless scheduling.
+*   **Page 14 (Contact):** A streamlined table for inquiries, efficiently capturing `subject`, `message`, `timestamp`, and `user_contact_info` for responsive communication.
+*   **Page 15 (Celebrations):** A specialized, flexible table for `event_leads`, encompassing `event_type` (e.g., Birthday/Anniversary/Corporate), `estimated_budget`, `add_ons` (e.g., Live Music, Catering, Decor), and `lead_status`. This will be the engine for our bespoke event planning.
+
+## 3. The 15-Page Scope: A Journey of Discovery
+
+We will construct a comprehensive 15-page experience, leveraging **modular, reusable components** to ensure scalability and maintainability:
+
+*   **01-03 Home Versions:** Three distinct entry points, each a masterpiece: (1. **Brutalist Hero** - a bold, immediate statement; 2. **Video-Background Minimalist** - serene yet powerful; 3. **Interactive Product-Focus** - engaging and detail-oriented).
+*   **04-09 Core Pages:** The heart of CAFE co.'s narrative: **About Us**, a dynamic **Menu (DB-driven)**, **Team** showcase, detailed **Team Profiles**, an immersive **Shop (with Cart Logic)**, and intricate **Shop Details**.
+*   **10-14 Utilities:** Essential functionalities, perfected: **Reservation (Functional Form)**, engaging **Blog Lists**, in-depth **Blog Details**, a captivating **Gallery (Masonry Grid)**, and a responsive **Contact (Functional Form)**.
+*   **15 The Celebration Hub:** The grand finale – a **"crazy" multi-step interactive builder** for booking parties and events, seamlessly writing directly to the `event_leads` database. This will be an intuitive, delightful experience.
+
+## 4. Technical Specifications: Precision Engineering
+
+**Framework:** The foundational strength of **Bootstrap 5 (for Grid/Utilities)**, augmented by the expressive power of **Custom SCSS** for bespoke styling.
+
+**Icons:** A curated selection of **Feather Icons & Flaticon (SVG only)**, ensuring crisp, scalable iconography.
+
+**Typography:** A harmonious blend of **Google Fonts** – a high-impact Serif for commanding headers, paired with a clean Sans-serif for optimal body readability.
+
+**Development Standards:**
+
+*   **Exemplary Code:** Clean, meticulously documented, and modular code is paramount.
+*   **Responsive Brilliance:** Mobile-optimized design that not only adapts but preserves the audacious "crazy" desktop energy across all devices.
+*   **Vector-Only Iconography:** For unparalleled clarity and scalability.
+*   **"Pixel Perfect" Execution:** Unwavering commitment to flawless rendering on all 1280px breakpoints.
+
+## 5. Execution Step-by-Step: A Strategic Blueprint
+
+1.  **Initialize:** Establish the robust Backend Server and meticulously define the Database Schema.
+2.  **Style Guide:** Develop the comprehensive Global SCSS/CSS variables, encapsulating the distinct "CAFE co." brand identity.
+3.  **Hero Build:** Prioritize the construction of `Home_One` to firmly establish the groundbreaking "Crazy Layout" rules and design principles.
+4.  **Database Integration:** Seamlessly connect the functional forms on Pages 10, 14, and 15 to the API, ensuring data integrity and real-time interaction.
+5.  **Scaling:** Systematically generate the remaining 12 pages, rigorously adhering to the established Style Guide and design language, ensuring consistency and efficiency.

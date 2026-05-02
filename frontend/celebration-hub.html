@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Celebration Hub | CAFE co.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap-grid.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./scss/main.scss">
+  <style>
+    body {
+      transition: background-image 1s ease-in-out;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    .overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(10, 10, 10, 0.85);
+      z-index: -1;
+    }
+    .progress-bar {
+      position: fixed;
+      top: 0; left: 0; width: 0%; height: 4px;
+      background: var(--burn);
+      z-index: 1000;
+    }
+    .step-section {
+      display: none;
+      opacity: 0;
+    }
+    .step-section.active {
+      display: block;
+    }
+    .event-card {
+      border: 1px solid var(--grain);
+      padding: 3rem 2rem;
+      text-align: center;
+      cursor: none;
+      transition: transform var(--transition-fast), border-color var(--transition-fast);
+      background: rgba(10, 10, 10, 0.5);
+      backdrop-filter: blur(10px);
+    }
+    .event-card:hover { border-color: var(--cream); transform: translateY(-5px); }
+    .event-card.selected { border-color: var(--burn); transform: scale(1.05); }
+    
+    .addon-card {
+      border: 1px solid var(--grain);
+      padding: 1.5rem;
+      cursor: none;
+      transition: all var(--transition-fast);
+      background: rgba(10, 10, 10, 0.5);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .addon-card.selected { border-color: var(--burn); background: rgba(200, 57, 10, 0.1); }
+    
+    .form-control {
+      background: transparent;
+      border: none; border-bottom: 1px solid var(--grain);
+      color: var(--cream); border-radius: 0; padding-left: 0; font-family: var(--font-body);
+      margin-bottom: 2rem; width: 100%;
+    }
+    .form-control:focus { outline: none; border-color: var(--burn); }
+    
+    .nav-buttons {
+      margin-top: 4rem;
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body style="padding-top: 100px;">
+  <div class="overlay"></div>
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <nav class="site-nav scrolled">
+    <a href="index.html" class="logo">CAFE co.</a>
+    <div class="nav-links">
+      <a href="about.html">About</a>
+      <a href="menu.html">Menu</a>
+      <a href="celebration-hub.html" class="active">Events</a>
+    </div>
+  </nav>
+
+  <div class="container py-5" style="max-width: 900px;">
+    
+    <!-- Step 1 -->
+    <div class="step-section active" id="step-1">
+      <h1 class="hero-title" style="font-size: clamp(40px, 6vw, 100px); left: 0;">CHOOSE YOUR MOMENT.</h1>
+      <div class="row mt-5 pt-4">
+        <div class="col-6 mb-4">
+          <div class="event-card" data-type="Birthday" data-bg="https://images.unsplash.com/photo-1530103862676-de8892bc952f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80">
+            <h3 class="font-editorial">Birthday</h3>
+          </div>
+        </div>
+        <div class="col-6 mb-4">
+          <div class="event-card" data-type="Anniversary" data-bg="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80">
+            <h3 class="font-editorial">Anniversary</h3>
+          </div>
+        </div>
+        <div class="col-6 mb-4">
+          <div class="event-card" data-type="Corporate" data-bg="https://images.unsplash.com/photo-1528605248644-14dd04022da1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80">
+            <h3 class="font-editorial">Corporate</h3>
+          </div>
+        </div>
+        <div class="col-6 mb-4">
+          <div class="event-card" data-type="Wedding" data-bg="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80">
+            <h3 class="font-editorial">Wedding</h3>
+          </div>
+        </div>
+      </div>
+      <div class="nav-buttons justify-content-end">
+        <button class="btn-brutal btn-next">Next Step</button>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step-section" id="step-2">
+      <h2 class="editorial-header mb-5">Set the Scene.</h2>
+      <input type="date" class="form-control" id="ev-date" placeholder="Event Date">
+      <input type="number" class="form-control" id="ev-guests" placeholder="Guest Count (Est.)">
+      
+      <p class="accent-text mb-3">Estimated Budget</p>
+      <select class="form-control" id="ev-budget">
+        <option>&lt;₹40,000</option>
+        <option>₹40,000–₹1,25,000</option>
+        <option>₹1,25,000–₹4,00,000</option>
+        <option>&gt;₹4,00,000</option>
+      </select>
+
+      <div class="nav-buttons">
+        <button class="btn-brutal btn-prev">Back</button>
+        <button class="btn-brutal btn-next">Next Step</button>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step-section" id="step-3">
+      <h2 class="editorial-header mb-5">Build Your Experience.</h2>
+      
+      <div class="addon-card mb-3" data-addon="Live Music">
+        <div>
+          <div class="font-editorial fs-4">Live Music</div>
+          <div class="accent-text text-muted" style="font-size: 0.8rem;">Jazz Trio / DJ / Acoustic</div>
+        </div>
+        <div class="check-indicator" style="opacity: 0;">✔</div>
+      </div>
+      <div class="addon-card mb-3" data-addon="Catering">
+        <div>
+          <div class="font-editorial fs-4">Catering</div>
+          <div class="accent-text text-muted" style="font-size: 0.8rem;">Custom Canapés & Pairings</div>
+        </div>
+        <div class="check-indicator" style="opacity: 0;">✔</div>
+      </div>
+      <div class="addon-card mb-3" data-addon="Photography">
+        <div>
+          <div class="font-editorial fs-4">Photography</div>
+          <div class="accent-text text-muted" style="font-size: 0.8rem;">Editorial Event Coverage</div>
+        </div>
+        <div class="check-indicator" style="opacity: 0;">✔</div>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-brutal btn-prev">Back</button>
+        <button class="btn-brutal btn-next">Next Step</button>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step-section" id="step-4">
+      <h2 class="editorial-header mb-5">Contact Details.</h2>
+      <input type="text" class="form-control" id="ev-name" placeholder="Full Name">
+      <input type="email" class="form-control" id="ev-email" placeholder="Email Address">
+      <input type="tel" class="form-control" id="ev-phone" placeholder="Phone Number">
+      <input type="text" class="form-control" id="ev-notes" placeholder="Special Requests">
+
+      <div class="nav-buttons">
+        <button class="btn-brutal btn-prev">Back</button>
+        <button class="btn-brutal btn-next">Preview</button>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step-section" id="step-5">
+      <h2 class="editorial-header mb-5">The Manifest.</h2>
+      <div id="summary-card" class="p-4" style="border: 1px solid var(--burn); background: rgba(10,10,10,0.8);">
+        <!-- Injected -->
+      </div>
+      <div id="ev-error" class="text-danger mt-3 accent-text"></div>
+      <div class="nav-buttons">
+        <button class="btn-brutal btn-prev">Back</button>
+        <button class="btn-brutal btn-primary" id="btn-submit">Submit Request</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="./js/cursor.js"></script>
+  <script>
+    (() => {
+      let currentStep = 1;
+      const totalSteps = 5;
+      const eventData = { event_type: '', add_ons: [] };
+
+      // Step 1: Selection
+      document.querySelectorAll('.event-card').forEach(card => {
+        card.addEventListener('click', () => {
+          document.querySelectorAll('.event-card').forEach(c => c.classList.remove('selected', 'opacity-50'));
+          card.classList.add('selected');
+          
+          document.querySelectorAll('.event-card:not(.selected)').forEach(c => c.classList.add('opacity-50'));
+          
+          eventData.event_type = card.getAttribute('data-type');
+          document.body.style.backgroundImage = `url(${card.getAttribute('data-bg')})`;
+        });
+      });
+
+      // Step 3: Addons
+      document.querySelectorAll('.addon-card').forEach(card => {
+        card.addEventListener('click', () => {
+          card.classList.toggle('selected');
+          const check = card.querySelector('.check-indicator');
+          const addon = card.getAttribute('data-addon');
+          
+          if (card.classList.contains('selected')) {
+            gsap.to(check, { opacity: 1, duration: 0.2 });
+            if (!eventData.add_ons.includes(addon)) eventData.add_ons.push(addon);
+          } else {
+            gsap.to(check, { opacity: 0, duration: 0.2 });
+            eventData.add_ons = eventData.add_ons.filter(a => a !== addon);
+          }
+        });
+      });
+
+      // Navigation Logic
+      const updateStep = (newStep) => {
+        if (newStep < 1 || newStep > totalSteps) return;
+        
+        const oldS = document.getElementById(`step-${currentStep}`);
+        const newS = document.getElementById(`step-${newStep}`);
+        
+        gsap.to(oldS, {
+          opacity: 0, y: -20, duration: 0.4,
+          onComplete: () => {
+            oldS.classList.remove('active');
+            newS.classList.add('active');
+            
+            if (newStep === 5) populateSummary();
+
+            gsap.fromTo(newS, 
+              { opacity: 0, y: 20 }, 
+              { opacity: 1, y: 0, duration: 0.4 }
+            );
+          }
+        });
+
+        currentStep = newStep;
+        gsap.to('#progress-bar', { width: `${(currentStep / totalSteps) * 100}%`, duration: 0.5 });
+      };
+
+      document.querySelectorAll('.btn-next').forEach(btn => btn.addEventListener('click', () => updateStep(currentStep + 1)));
+      document.querySelectorAll('.btn-prev').forEach(btn => btn.addEventListener('click', () => updateStep(currentStep - 1)));
+
+      function populateSummary() {
+        const d = document.getElementById('ev-date').value;
+        const g = document.getElementById('ev-guests').value;
+        const b = document.getElementById('ev-budget').value;
+        const n = document.getElementById('ev-name').value;
+        
+        document.getElementById('summary-card').innerHTML = `
+          <h4 class="font-editorial fs-3 mb-4">${eventData.event_type} Celebration</h4>
+          <p class="accent-text mb-2">Date: <span class="text-white">${d || 'TBD'}</span></p>
+          <p class="accent-text mb-2">Guests: <span class="text-white">${g || 'TBD'}</span></p>
+          <p class="accent-text mb-2">Budget: <span class="text-white">${b}</span></p>
+          <p class="accent-text mb-4">Add-ons: <span class="text-white">${eventData.add_ons.join(', ') || 'None'}</span></p>
+          <hr style="border-color: var(--grain)">
+          <p class="accent-text mt-4">Contact: <span class="text-white">${n || 'TBD'}</span></p>
+        `;
+      }
+
+      // Submit
+      document.getElementById('btn-submit').addEventListener('click', async () => {
+        const payload = {
+          event_type: eventData.event_type || 'Other',
+          event_date: document.getElementById('ev-date').value,
+          guest_count: parseInt(document.getElementById('ev-guests').value) || 0,
+          estimated_budget: document.getElementById('ev-budget').value,
+          add_ons: eventData.add_ons,
+          contact_name: document.getElementById('ev-name').value,
+          contact_email: document.getElementById('ev-email').value,
+          contact_phone: document.getElementById('ev-phone').value,
+          special_requests: document.getElementById('ev-notes').value
+        };
+
+        try {
+          const res = await fetch('http://localhost:3001/api/events/leads', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const data = await res.json();
+          
+          if (res.ok) {
+            document.getElementById('step-5').innerHTML = `
+              <div class="text-center py-5">
+                <h2 class="editorial-header mb-4">Inquiry Received</h2>
+                <p class="accent-text">Our event director will be in touch.</p>
+              </div>
+            `;
+          } else {
+            document.getElementById('ev-error').innerText = data.error;
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      });
+      
+      // Init progress
+      gsap.to('#progress-bar', { width: '20%', duration: 0.5 });
+      gsap.to('#step-1', { opacity: 1, duration: 0.5 });
+    })();
+  </script>
+</body>
+</html>
