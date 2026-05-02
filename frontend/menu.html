@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Menu | CAFE co.</title>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap-grid.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="./scss/main.scss">
+  <link rel="stylesheet" href="./css/main.css">
   <style>
     /* Menu Filters */
     .menu-filters {
@@ -16,6 +19,7 @@
       padding-bottom: 1rem;
       overflow-x: auto;
     }
+
     .filter-tab {
       font-family: var(--font-accent);
       text-transform: uppercase;
@@ -28,6 +32,7 @@
       position: relative;
       transition: color var(--transition-fast);
     }
+
     .filter-tab::after {
       content: '';
       position: absolute;
@@ -40,13 +45,17 @@
       transform-origin: left;
       transition: transform var(--transition-fast);
     }
-    .filter-tab:hover, .filter-tab.active {
+
+    .filter-tab:hover,
+    .filter-tab.active {
       color: var(--cream);
     }
-    .filter-tab:hover::after, .filter-tab.active::after {
+
+    .filter-tab:hover::after,
+    .filter-tab.active::after {
       transform: scaleX(1);
     }
-    
+
     /* Menu Cards */
     .menu-card {
       display: flex;
@@ -55,13 +64,16 @@
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.32, 1);
       cursor: none;
     }
+
     .menu-card:hover {
       transform: translateY(-8px);
     }
+
     .menu-card .img-container {
       overflow: hidden;
       margin-bottom: 1.5rem;
     }
+
     .menu-card img {
       aspect-ratio: 4/3;
       width: 100%;
@@ -69,30 +81,36 @@
       filter: contrast(1.08) saturate(0.92);
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.32, 1);
     }
+
     .menu-card:hover img {
       transform: scale(1.05);
     }
+
     .menu-card .name {
       font-family: var(--font-editorial);
       font-size: 1.5rem;
       margin-bottom: 0.5rem;
     }
+
     .menu-card .desc {
       color: var(--chalk);
       font-size: 0.9rem;
       margin-bottom: 1rem;
       flex-grow: 1;
     }
+
     .menu-card .price {
       font-family: var(--font-accent);
       color: var(--cream);
       transition: color var(--transition-fast);
     }
+
     .menu-card:hover .price {
       color: var(--burn);
     }
   </style>
 </head>
+
 <body style="padding-top: 100px;">
 
   <nav class="site-nav scrolled">
@@ -107,7 +125,7 @@
 
   <div class="container py-5">
     <h1 class="hero-title" style="font-size: clamp(60px, 8vw, 150px); left: 0;">OUR<br>OFFERINGS.</h1>
-    
+
     <div class="menu-filters mt-5">
       <button class="filter-tab active" data-filter="all">All</button>
       <button class="filter-tab" data-filter="Espresso Drinks">Espresso Drinks</button>
@@ -175,7 +193,7 @@
           tabs.forEach(t => t.classList.remove('active'));
           e.target.classList.add('active');
           const filter = e.target.getAttribute('data-filter');
-          
+
           gsap.to('.menu-card', {
             opacity: 0,
             y: 20,
@@ -190,4 +208,5 @@
     })();
   </script>
 </body>
+
 </html>
