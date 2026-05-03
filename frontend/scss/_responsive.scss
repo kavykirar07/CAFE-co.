@@ -1,0 +1,298 @@
+// ==========================================================================
+// _responsive.scss — Mobile-First Breakpoints
+// Breakpoints: Mobile < 768px | Tablet 768px–1024px | Desktop > 1024px
+// ==========================================================================
+
+@use 'variables' as *;
+
+// --------------------------------------------------------------------------
+// 1. Global Responsive Resets
+// --------------------------------------------------------------------------
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// --------------------------------------------------------------------------
+// 2. Hamburger Menu (CSS + JS toggle — zero-dependency)
+// --------------------------------------------------------------------------
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  z-index: 200;
+
+  .bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--cream);
+    transition: transform 0.35s ease, opacity 0.35s ease;
+    transform-origin: center;
+  }
+
+  &.open .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+  &.open .bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  &.open .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+}
+
+// --------------------------------------------------------------------------
+// 3. Tablet — 768px to 1024px
+// --------------------------------------------------------------------------
+@media (max-width: 1024px) {
+  .container {
+    width: 92% !important;
+    max-width: 100% !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .hero-title {
+    font-size: clamp(48px, 9vw, 120px) !important;
+    margin-left: 0 !important;
+    width: 100% !important;
+    white-space: normal !important;
+  }
+
+  .stagger-section {
+    margin-top: -8vh;
+  }
+
+  .site-footer .footer-row {
+    gap: 1.5rem;
+  }
+}
+
+// --------------------------------------------------------------------------
+// 4. Mobile — max 767px
+// --------------------------------------------------------------------------
+@media (max-width: 767px) {
+  // — Body
+  body {
+    cursor: auto !important; // Restore native cursor on touch
+    overflow-x: hidden;
+  }
+
+  // Hide custom cursor on touch devices
+  .custom-cursor { display: none !important; }
+
+  // — Container
+  .container {
+    width: 90% !important;
+    max-width: 100% !important;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  // — Navigation
+  .site-nav {
+    padding: 0 5vw;
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 64px;
+    align-items: center;
+
+    .logo {
+      font-size: 1.5rem;
+    }
+
+    // Hide desktop nav links by default on mobile
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      gap: 1.25rem;
+      width: 100%;
+      padding: 1.25rem 0 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      margin-top: 0.5rem;
+
+      &.is-open {
+        display: flex;
+      }
+
+      a {
+        font-size: 1.1rem;
+      }
+    }
+
+    // CTA button — hidden by default on mobile, revealed inside the open menu
+    .btn-brutal.btn-primary {
+      display: none;
+      width: 100%;
+      text-align: center;
+      margin-top: 0.25rem;
+      padding: 0.85rem 1.5rem;
+    }
+
+    // Show CTA when nav-links is open (general sibling: nav-links → hamburger → btn)
+    .nav-links.is-open ~ .nav-hamburger ~ .btn-brutal.btn-primary,
+    .nav-links.is-open ~ .btn-brutal.btn-primary {
+      display: block;
+    }
+
+    // Show hamburger
+    .nav-hamburger {
+      display: flex;
+    }
+  }
+
+  // — Hero
+  .hero-title {
+    font-size: clamp(36px, 12vw, 80px) !important;
+    margin-left: 0 !important;
+    width: 100% !important;
+    white-space: normal !important;
+    line-height: 0.9;
+  }
+
+  .hero-section {
+    .fg-layer {
+      padding: 0 5vw;
+      justify-content: flex-end;
+      padding-bottom: 8vh;
+    }
+  }
+
+  // — Stagger Section Overlap (remove negative margin on mobile)
+  .stagger-section {
+    margin-top: 0;
+    padding-top: 2rem !important;
+  }
+
+  // — Diagonal break (reduce height)
+  .diagonal-break {
+    height: 8vh !important;
+  }
+
+  // — Featured Content Grid (index.html)
+  // Fix the negative margin offset
+  [style*="margin-top: -5vh"] {
+    margin-top: 0 !important;
+  }
+
+  // — “Our Story” manifesto row — make all cols full-width on mobile
+  // col-1 wraps the vertical text which is already hidden; collapse it
+  .stagger-section .col-1 {
+    display: none;
+  }
+
+  // col-7 offset-1 (editorial header) → full width, zero offset
+  .stagger-section .offset-1 {
+    margin-left: 0 !important;
+  }
+  .stagger-section .col-7 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  // col-3 text-end (Our Story button) → full width, left-aligned
+  .stagger-section .col-3.text-end {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    text-align: left !important;
+    margin-top: 1.5rem;
+  }
+
+  // — Vertical text — hide on mobile (causes overflow)
+  .vertical-text {
+    display: none;
+  }
+
+  // — Editorial header
+  .editorial-header {
+    font-size: clamp(1.5rem, 6vw, 2.5rem) !important;
+  }
+
+  // — Structural Rule
+  .structural-rule {
+    margin: 2rem 0;
+  }
+
+  // — Marquee: slow down slightly for readability
+  .marquee-container .marquee-content {
+    font-size: 1rem;
+    animation-duration: 25s;
+
+    span {
+      margin: 0 5vw;
+    }
+  }
+
+  // — Images
+  .img-brutalist {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  // — Footer
+  .site-footer {
+    padding: 2.5rem 0 1.5rem;
+
+    .footer-row {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .footer-col {
+      min-width: 100%;
+      flex: none;
+
+      // Override Bootstrap col classes inside footer
+      &.col-4, &.col-2, &.col-3 {
+        width: 100%;
+        flex: none;
+      }
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: center;
+      padding-top: 1.5rem;
+    }
+  }
+
+  // — Contact page: two-column form fields → stack
+  .col-6.input-group {
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+
+  // — About page stats
+  .col-4 {
+    // Keep 3-col stat row intact (they're small enough)
+  }
+
+  // — Buttons
+  .btn-brutal {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+  // — Accent text
+  .accent-text {
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+}
+
+// --------------------------------------------------------------------------
+// 5. Very small screens (< 380px)
+// --------------------------------------------------------------------------
+@media (max-width: 380px) {
+  .hero-title {
+    font-size: clamp(28px, 13vw, 56px) !important;
+  }
+
+  .site-nav .logo {
+    font-size: 1.25rem;
+  }
+}

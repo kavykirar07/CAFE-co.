@@ -61,9 +61,15 @@
   }
 }
 
-// Custom Cursor
-body {
-  cursor: none; // Hide default cursor on desktop
+// Custom Cursor — only on devices with a fine pointer (mouse)
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+
+  a, button, .btn-brutal {
+    cursor: none; // use custom cursor
+  }
 }
 
 .custom-cursor {
@@ -115,7 +121,6 @@ body {
   position: relative;
   overflow: hidden;
   transition: color var(--transition-fast);
-  cursor: none; // use custom cursor
   
   &::before {
     content: '';

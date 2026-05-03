@@ -1,4 +1,7 @@
 (() => {
+  // Skip custom cursor on touch/mobile devices — restore native cursor
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
   const cursorDot = document.createElement('div');
   cursorDot.classList.add('cursor-dot');
   

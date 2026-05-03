@@ -23,13 +23,18 @@
 <body>
 
   <!-- Navigation -->
-  <nav class="site-nav">
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
     <a href="index.html" class="logo">CAFE co.</a>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       <a href="about.html">About</a>
       <a href="menu.html">Menu</a>
       <a href="shop.html">Shop</a>
     </div>
+    <button class="nav-hamburger" aria-label="Toggle navigation" aria-controls="nav-links" aria-expanded="false">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
     <a href="reservations.html" class="btn-brutal btn-primary">Reserve a Table</a>
   </nav>
 

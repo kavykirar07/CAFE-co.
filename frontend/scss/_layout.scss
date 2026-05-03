@@ -4,9 +4,17 @@
   box-sizing: border-box;
 }
 
+html, body {
+  overflow-x: hidden; // Prevent horizontal scroll globally
+  width: 100%;
+}
+
 // Bootstrap Overrides and Brutalist Grid Rules
 .container {
   max-width: 1280px !important;
+  width: 90%;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .stagger-section {

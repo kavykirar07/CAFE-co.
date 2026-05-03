@@ -15,10 +15,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-title {
   font-family: var(--font-hero);
-  font-size: clamp(60px, 10vw, 200px);
+  font-size: clamp(36px, 10vw, 200px);
   text-transform: uppercase;
   letter-spacing: 0.02em;
   line-height: 0.85;
+  // Desktop bleed effect — overridden to 0/100% on mobile via _responsive.scss
   margin-left: -5vw;
   width: 110vw;
   white-space: normal;
